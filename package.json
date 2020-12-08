@@ -4,6 +4,9 @@
   "description": "Node JS Restful API CRUD with Express and mongoDB",
   "main": "server.js",
   "scripts": {
+    "dev": "node build/dev-server.js",
+    "start": "node server.js",
+    "build": "node build/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
