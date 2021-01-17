@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
-  Tutorial.find(condition)
+  Tutorial.find({})
     .then(data => {
       res.send(data);
     })
