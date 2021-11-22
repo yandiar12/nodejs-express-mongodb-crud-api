@@ -1,28 +1,29 @@
 module.exports = app => {
+  const { authJwt } = require('../middlewares')
   const tutorials = require("../controllers/tutorial.controller.js");
 
   var router = require("express").Router();
 
   // Create a new Tutorial
-  router.post("/", tutorials.create);
+  router.post("/", [authJwt.verifyToken], tutorials.create);
 
   // Retrieve all Tutorials
-  router.get("/", tutorials.findAll);
+  router.get("/", [authJwt.verifyToken], tutorials.findAll);
 
   // Retrieve all published Tutorials
-  router.get("/published", tutorials.findAllPublished);
+  router.get("/published", [authJwt.verifyToken], tutorials.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/:id", tutorials.findOne);
+  router.get("/:id", [authJwt.verifyToken], tutorials.findOne);
 
   // Update a Tutorial with id
-  router.put("/:id", tutorials.update);
+  router.put("/:id", [authJwt.verifyToken], tutorials.update);
 
   // Delete a Tutorial with id
-  router.delete("/:id", tutorials.delete);
+  router.delete("/:id", [authJwt.verifyToken], tutorials.delete);
 
   // Create a new Tutorial
-  router.delete("/", tutorials.deleteAll);
+  router.delete("/", [authJwt.verifyToken], tutorials.deleteAll);
 
   app.use('/api/tutorials', router);
 };
